@@ -1,0 +1,21 @@
+mode: global
+provider_global:
+  lat: 35.231784
+  lon: 129.084016
+  alt: 50.0
+consumer_global:
+  lat: 35.236838
+  lon: 129.078915
+  alt: 50.0
+safe_alt_m: 10.0
+approach_alt_m: 3.0
+xy_accept_m: 0.5
+z_accept_m: 0.3
+timeouts_s:
+  takeoff: 60
+  cruise: 120
+  approach: 30
+  land: 30
+wait_s:
+  pickup: 10
+  deliver: 10
