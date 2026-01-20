@@ -1,0 +1,12 @@
+stations:
+  provider: {lat: 35.231624, lon: 129.085113, alt: 0.0}
+  consumer: {lat: 35.236904, lon: 129.079163, alt: 0.0}
+flight:
+  safe_alt_m: 10.0
+  approach_alt_m: 3.0
+waiting_s:
+  pickup: 10
+  deliver: 10
+orders:
+  auto_interval_s: 0
+  delivery_timeout_s: 300

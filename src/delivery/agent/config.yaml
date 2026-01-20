@@ -1,0 +1,22 @@
+stations:
+  provider: {north: 10.0, east: 0.0, down: 0.0}
+  consumer: {north: -10.0, east: 0.0, down: 0.0}
+flight:
+  safe_alt_m: 10.0
+  approach_alt_m: 3.0
+  setpoint_rate_hz: 20.0
+  xy_accept_m: 0.5
+  z_accept_m: 0.3
+  timeouts_s:
+    takeoff: 20
+    cruise: 120
+    approach: 30
+    land: 45
+waiting_s:
+  pickup: 10
+  deliver: 10
+abort:
+  return_ready: true
+  action: LAND
+status:
+  rate_hz: 3.0

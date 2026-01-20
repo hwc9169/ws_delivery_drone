@@ -1,0 +1,89 @@
+2026-01-19 17:35:46,715 INFO delivery.drone_agent.drone2 Drone connected
+2026-01-19 17:36:28,516 INFO delivery.drone_agent.drone2 Assigned order_id=64b3b244-31a4-40b3-80da-b4888f8fe85f
+2026-01-19 17:36:28,516 INFO delivery.drone_agent.drone2 State change DroneState.READY -> DroneState.GO_TO_PROVIDER
+2026-01-19 17:37:17,776 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_PROVIDER -> DroneState.WAITING_PICKUP
+2026-01-19 17:37:27,777 INFO delivery.drone_agent.drone2 State change DroneState.WAITING_PICKUP -> DroneState.GO_TO_CONSUMER
+2026-01-19 17:39:23,382 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_CONSUMER -> DroneState.WAITING_DELIVER
+2026-01-19 17:39:33,383 INFO delivery.drone_agent.drone2 State change DroneState.WAITING_DELIVER -> DroneState.DONE
+2026-01-19 17:39:33,401 INFO delivery.drone_agent.drone2 State change DroneState.DONE -> DroneState.READY
+2026-01-19 17:40:20,265 INFO delivery.drone_agent.drone2 Drone connected
+2026-01-19 17:40:34,746 INFO delivery.drone_agent.drone2 Assigned order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:40:34,747 INFO delivery.drone_agent.drone2 State change DroneState.READY -> DroneState.GO_TO_PROVIDER
+2026-01-19 17:42:43,779 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_PROVIDER -> DroneState.ABORT
+2026-01-19 17:43:14,493 INFO delivery.drone_agent.drone2 State change DroneState.ABORT -> DroneState.WAITING_PICKUP
+2026-01-19 17:43:24,495 INFO delivery.drone_agent.drone2 State change DroneState.WAITING_PICKUP -> DroneState.GO_TO_CONSUMER
+2026-01-19 17:43:24,514 ERROR delivery.drone_agent.drone2 State machine error: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()
+2026-01-19 17:43:24,514 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_CONSUMER -> DroneState.ABORT
+2026-01-19 17:43:24,537 INFO delivery.drone_agent.drone2 State change DroneState.ABORT -> DroneState.READY
+2026-01-19 17:46:44,052 INFO delivery.drone_agent.drone2 Assigned order_id=064b892d-a6bf-4722-b260-16c14ec9513b
+2026-01-19 17:46:44,052 INFO delivery.drone_agent.drone2 State change DroneState.READY -> DroneState.GO_TO_PROVIDER
+2026-01-19 17:48:30,065 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_PROVIDER -> DroneState.WAITING_PICKUP
+2026-01-19 17:48:40,066 INFO delivery.drone_agent.drone2 State change DroneState.WAITING_PICKUP -> DroneState.GO_TO_CONSUMER
+2026-01-19 17:49:40,418 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_CONSUMER -> DroneState.WAITING_DELIVER
+2026-01-19 17:49:50,418 INFO delivery.drone_agent.drone2 State change DroneState.WAITING_DELIVER -> DroneState.DONE
+2026-01-19 17:49:50,440 INFO delivery.drone_agent.drone2 State change DroneState.DONE -> DroneState.READY
+2026-01-19 17:52:46,967 INFO delivery.drone_agent.drone2 Drone connected
+2026-01-19 17:54:23,419 INFO delivery.drone_agent.drone2 Assigned order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:54:23,419 INFO delivery.drone_agent.drone2 State change DroneState.READY -> DroneState.GO_TO_PROVIDER
+2026-01-19 17:54:23,419 INFO delivery.drone_agent.drone2 Fly start target=(-738.78,825.83,50.36) safe_alt=10.00 approach_alt=3.00 yaw=0.0
+2026-01-19 17:54:23,446 INFO delivery.drone_agent.drone2 Fly phase takeoff to alt=10.00
+2026-01-19 17:54:32,507 INFO delivery.drone_agent.drone2 Fly phase cruise to (-738.78,825.83) alt=10.00
+2026-01-19 17:56:32,540 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_PROVIDER -> DroneState.ABORT
+2026-01-19 17:56:32,572 INFO delivery.drone_agent.drone2 Fly phase approach to (-738.78,825.83) alt=3.00
+2026-01-19 17:57:02,633 INFO delivery.drone_agent.drone2 Fly complete target=(-738.78,825.83,50.36)
+2026-01-19 17:57:02,697 INFO delivery.drone_agent.drone2 State change DroneState.ABORT -> DroneState.WAITING_PICKUP
+2026-01-19 17:57:12,698 INFO delivery.drone_agent.drone2 State change DroneState.WAITING_PICKUP -> DroneState.GO_TO_CONSUMER
+2026-01-19 17:57:12,698 INFO delivery.drone_agent.drone2 Fly start target=(585.81,-541.59,0.05) safe_alt=10.00 approach_alt=3.00 yaw=0.0
+2026-01-19 17:57:12,723 ERROR delivery.drone_agent.drone2 State machine error: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()
+2026-01-19 17:57:12,724 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_CONSUMER -> DroneState.ABORT
+2026-01-19 17:57:12,748 INFO delivery.drone_agent.drone2 State change DroneState.ABORT -> DroneState.READY
+2026-01-19 18:05:01,618 INFO delivery.drone_agent.drone2 Drone connected
+2026-01-19 18:05:55,239 INFO delivery.drone_agent.drone2 Assigned order_id=dc7a94c0-db1c-4034-804a-841d3ac3b713
+2026-01-19 18:05:55,240 INFO delivery.drone_agent.drone2 State change DroneState.READY -> DroneState.GO_TO_PROVIDER
+2026-01-19 18:05:55,240 INFO delivery.drone_agent.drone2 Fly start target=(269.90,-218.38,50.27) safe_alt=10.00 approach_alt=3.00 yaw=0.0
+2026-01-19 18:05:55,261 ERROR delivery.drone_agent.drone2 State machine error: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()
+2026-01-19 18:05:55,262 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_PROVIDER -> DroneState.ABORT
+2026-01-19 18:05:55,286 INFO delivery.drone_agent.drone2 State change DroneState.ABORT -> DroneState.READY
+2026-01-19 18:06:52,453 INFO delivery.drone_agent.drone2 Assigned order_id=4ee53208-c53c-4fc2-82dd-7a6a3d170a34
+2026-01-19 18:06:52,453 INFO delivery.drone_agent.drone2 State change DroneState.READY -> DroneState.GO_TO_PROVIDER
+2026-01-19 18:06:52,453 INFO delivery.drone_agent.drone2 Fly start target=(269.88,-218.40,50.30) safe_alt=10.00 approach_alt=3.00 yaw=0.0
+2026-01-19 18:06:52,464 ERROR delivery.drone_agent.drone2 State machine error: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()
+2026-01-19 18:06:52,464 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_PROVIDER -> DroneState.ABORT
+2026-01-19 18:06:52,488 INFO delivery.drone_agent.drone2 State change DroneState.ABORT -> DroneState.READY
+2026-01-19 18:08:29,803 INFO delivery.drone_agent.drone2 Assigned order_id=4ad1091a-d8bd-442e-b764-9c551afcc494
+2026-01-19 18:08:29,804 INFO delivery.drone_agent.drone2 State change DroneState.READY -> DroneState.GO_TO_PROVIDER
+2026-01-19 18:08:29,804 INFO delivery.drone_agent.drone2 Fly start target=(269.89,-218.36,50.26) safe_alt=10.00 approach_alt=3.00 yaw=0.0
+2026-01-19 18:08:29,834 INFO delivery.drone_agent.drone2 Takeoff start
+2026-01-19 18:08:29,846 INFO delivery.drone_agent.drone2 Fly phase takeoff to alt=10.00
+2026-01-19 18:08:38,845 INFO delivery.drone_agent.drone2 Takeoff complete at alt=10.00
+2026-01-19 18:08:38,846 INFO delivery.drone_agent.drone2 Fly phase cruise to (269.89,-218.36) alt=10.00
+2026-01-19 18:09:09,272 INFO delivery.drone_agent.drone2 Fly phase approach to (269.89,-218.36) alt=3.00
+2026-01-19 18:09:14,638 INFO delivery.drone_agent.drone2 Fly complete target=(269.89,-218.36,50.26)
+2026-01-19 18:09:14,638 INFO delivery.drone_agent.drone2 Land start gps=(35.2316169,129.0851113,53.50)
+2026-01-19 18:09:21,175 INFO delivery.drone_agent.drone2 Land complete gps=(35.2316148,129.0851126,50.25)
+2026-01-19 18:09:21,175 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_PROVIDER -> DroneState.WAITING_PICKUP
+2026-01-19 18:09:31,176 INFO delivery.drone_agent.drone2 State change DroneState.WAITING_PICKUP -> DroneState.GO_TO_CONSUMER
+2026-01-19 18:09:31,176 INFO delivery.drone_agent.drone2 Fly start target=(585.81,-541.59,0.05) safe_alt=10.00 approach_alt=3.00 yaw=0.0
+2026-01-19 18:09:31,193 INFO delivery.drone_agent.drone2 Takeoff start
+2026-01-19 18:09:31,209 INFO delivery.drone_agent.drone2 Fly phase takeoff to alt=10.00
+2026-01-19 18:09:40,186 INFO delivery.drone_agent.drone2 Takeoff complete at alt=10.00
+2026-01-19 18:09:40,186 INFO delivery.drone_agent.drone2 Fly phase cruise to (585.81,-541.59) alt=10.00
+2026-01-19 18:10:19,447 INFO delivery.drone_agent.drone2 Fly phase approach to (585.81,-541.59) alt=3.00
+2026-01-19 18:10:24,817 INFO delivery.drone_agent.drone2 Fly complete target=(585.81,-541.59,0.05)
+2026-01-19 18:10:24,817 INFO delivery.drone_agent.drone2 Land start gps=(35.2344578,129.0815519,53.50)
+2026-01-19 18:10:31,539 INFO delivery.drone_agent.drone2 Land complete gps=(35.2344561,129.0815536,50.24)
+2026-01-19 18:10:31,539 INFO delivery.drone_agent.drone2 State change DroneState.GO_TO_CONSUMER -> DroneState.WAITING_DELIVER
+2026-01-19 18:10:41,540 INFO delivery.drone_agent.drone2 State change DroneState.WAITING_DELIVER -> DroneState.DONE
+2026-01-19 18:10:41,555 INFO delivery.drone_agent.drone2 State change DroneState.DONE -> DroneState.READY
+2026-01-19 18:27:04,342 INFO delivery.drone_agent.drone2 Drone connected
+2026-01-19 18:27:11,632 INFO delivery.drone_agent.drone2 Assigned order_id=db86a556-ebb2-4812-a4d2-8abd5eeaf93c
+2026-01-19 18:27:11,632 INFO delivery.drone_agent.drone2 Flying to provider gps=(35.2344561,129.0815533,50.25)
+2026-01-19 18:27:11,649 INFO delivery.drone_agent.drone2 Takeoff start
+2026-01-19 18:27:11,661 INFO delivery.drone_agent.drone2 Fly phase takeoff to alt=10.00
+2026-01-19 18:28:05,293 INFO delivery.drone_agent.drone2 Fly complete target=(271.22,-217.14,50.23)
+2026-01-19 18:28:12,067 INFO delivery.drone_agent.drone2 Land complete gps=(35.2316340,129.0851162,50.25)
+2026-01-19 18:28:22,068 INFO delivery.drone_agent.drone2 Flying to consumer gps=(35.2316340,129.0851163,50.25)
+2026-01-19 18:28:22,085 INFO delivery.drone_agent.drone2 Takeoff start
+2026-01-19 18:28:22,097 INFO delivery.drone_agent.drone2 Fly phase takeoff to alt=10.00
+2026-01-19 18:29:44,583 INFO delivery.drone_agent.drone2 Fly complete target=(856.31,-759.49,50.26)
+2026-01-19 18:29:51,457 INFO delivery.drone_agent.drone2 Land complete gps=(35.2368889,129.0791539,50.24)

@@ -1,0 +1,338 @@
+2026-01-19 17:36:23,890 INFO delivery.orchestration Drone state change id=drone2 None -> READY
+2026-01-19 17:36:28,515 INFO delivery.orchestration Order created order_id=64b3b244-31a4-40b3-80da-b4888f8fe85f
+2026-01-19 17:36:28,516 INFO delivery.orchestration Assigned order_id=64b3b244-31a4-40b3-80da-b4888f8fe85f to drone_id=drone2
+2026-01-19 17:36:28,517 INFO delivery.orchestration Drone state change id=drone2 READY -> GO_TO_PROVIDER
+2026-01-19 17:37:17,777 INFO delivery.orchestration Drone state change id=drone2 GO_TO_PROVIDER -> WAITING_PICKUP
+2026-01-19 17:37:27,779 INFO delivery.orchestration Drone state change id=drone2 WAITING_PICKUP -> GO_TO_CONSUMER
+2026-01-19 17:39:23,383 INFO delivery.orchestration Drone state change id=drone2 GO_TO_CONSUMER -> WAITING_DELIVER
+2026-01-19 17:39:33,384 INFO delivery.orchestration Drone state change id=drone2 WAITING_DELIVER -> DONE
+2026-01-19 17:39:33,385 INFO delivery.orchestration Order completed order_id=64b3b244-31a4-40b3-80da-b4888f8fe85f drone_id=drone2
+2026-01-19 17:39:33,402 INFO delivery.orchestration Drone state change id=drone2 DONE -> READY
+2026-01-19 17:40:33,999 INFO delivery.orchestration Drone state change id=drone2 None -> READY
+2026-01-19 17:40:34,745 INFO delivery.orchestration Order created order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:40:34,746 INFO delivery.orchestration Assigned order_id=8eaa1411-7522-4989-b545-332fb02c3a8f to drone_id=drone2
+2026-01-19 17:40:34,748 INFO delivery.orchestration Drone state change id=drone2 READY -> GO_TO_PROVIDER
+2026-01-19 17:42:43,780 INFO delivery.orchestration Drone state change id=drone2 GO_TO_PROVIDER -> ABORT
+2026-01-19 17:42:43,780 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:43,780 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:44,115 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:44,115 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:44,450 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:44,450 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:44,784 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:44,784 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:45,118 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:45,119 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:45,453 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:45,453 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:45,788 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:45,788 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:46,122 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:46,122 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:46,458 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:46,458 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:46,793 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:46,793 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:47,126 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:47,127 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:47,461 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:47,461 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:47,798 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:47,798 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:48,132 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:48,132 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:48,467 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:48,467 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:48,801 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:48,801 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:49,136 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:49,136 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:49,471 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:49,471 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:49,807 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:49,807 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:50,141 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:50,141 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:50,477 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:50,477 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:50,813 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:50,813 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:51,147 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:51,148 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:51,481 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:51,482 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:51,816 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:51,816 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:52,150 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:52,150 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:52,484 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:52,484 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:52,820 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:52,820 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:53,154 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:53,154 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:53,489 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:53,489 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:53,825 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:53,825 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:54,160 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:54,160 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:54,495 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:54,495 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:54,830 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:54,830 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:55,165 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:55,165 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:55,500 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:55,500 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:55,835 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:55,836 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:56,170 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:56,170 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:56,505 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:56,505 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:56,841 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:56,841 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:42:57,176 WARNING delivery.orchestration Order failed order_id=8eaa1411-7522-4989-b545-332fb02c3a8f drone_id=drone2
+2026-01-19 17:42:57,176 INFO delivery.orchestration No available drones to reassign order_id=8eaa1411-7522-4989-b545-332fb02c3a8f
+2026-01-19 17:43:13,914 INFO delivery.orchestration Drone state change id=drone2 None -> ABORT
+2026-01-19 17:43:14,494 INFO delivery.orchestration Drone state change id=drone2 ABORT -> WAITING_PICKUP
+2026-01-19 17:43:24,496 INFO delivery.orchestration Drone state change id=drone2 WAITING_PICKUP -> GO_TO_CONSUMER
+2026-01-19 17:43:24,515 INFO delivery.orchestration Drone state change id=drone2 GO_TO_CONSUMER -> ABORT
+2026-01-19 17:43:24,538 INFO delivery.orchestration Drone state change id=drone2 ABORT -> READY
+2026-01-19 17:44:45,569 INFO delivery.orchestration Drone state change id=drone2 None -> READY
+2026-01-19 17:45:02,319 INFO delivery.orchestration Drone state change id=drone2 None -> READY
+2026-01-19 17:46:44,051 INFO delivery.orchestration Order created order_id=064b892d-a6bf-4722-b260-16c14ec9513b
+2026-01-19 17:46:44,052 INFO delivery.orchestration Assigned order_id=064b892d-a6bf-4722-b260-16c14ec9513b to drone_id=drone2
+2026-01-19 17:46:44,053 INFO delivery.orchestration Drone state change id=drone2 READY -> GO_TO_PROVIDER
+2026-01-19 17:48:30,066 INFO delivery.orchestration Drone state change id=drone2 GO_TO_PROVIDER -> WAITING_PICKUP
+2026-01-19 17:48:40,067 INFO delivery.orchestration Drone state change id=drone2 WAITING_PICKUP -> GO_TO_CONSUMER
+2026-01-19 17:49:40,419 INFO delivery.orchestration Drone state change id=drone2 GO_TO_CONSUMER -> WAITING_DELIVER
+2026-01-19 17:49:50,419 INFO delivery.orchestration Drone state change id=drone2 WAITING_DELIVER -> DONE
+2026-01-19 17:49:50,419 INFO delivery.orchestration Order completed order_id=064b892d-a6bf-4722-b260-16c14ec9513b drone_id=drone2
+2026-01-19 17:49:50,442 INFO delivery.orchestration Drone state change id=drone2 DONE -> READY
+2026-01-19 17:52:41,917 INFO delivery.orchestration Drone state change id=drone2 None -> READY
+2026-01-19 17:54:23,418 INFO delivery.orchestration Order created order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:54:23,418 INFO delivery.orchestration Assign order order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2 drone_gps=(35.2382833,129.0760410,50.27) provider_gps=(35.2316240,129.0851130,0.00) consumer_gps=(35.2369040,129.0791630,0.00)
+2026-01-19 17:54:23,419 INFO delivery.orchestration Assigned order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef to drone_id=drone2
+2026-01-19 17:54:23,420 INFO delivery.orchestration Drone state change id=drone2 READY -> GO_TO_PROVIDER
+2026-01-19 17:56:32,542 INFO delivery.orchestration Drone state change id=drone2 GO_TO_PROVIDER -> ABORT
+2026-01-19 17:56:32,542 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:32,542 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:32,877 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:32,878 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:33,213 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:33,213 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:33,548 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:33,549 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:33,882 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:33,882 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:34,217 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:34,217 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:34,552 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:34,552 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:34,886 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:34,887 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:35,221 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:35,221 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:35,556 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:35,556 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:35,890 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:35,890 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:36,224 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:36,225 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:36,560 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:36,560 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:36,894 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:36,894 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:37,230 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:37,230 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:37,565 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:37,565 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:37,899 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:37,899 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:38,233 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:38,234 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:38,568 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:38,568 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:38,902 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:38,902 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:39,236 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:39,236 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:39,571 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:39,571 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:39,905 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:39,905 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:40,239 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:40,239 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:40,574 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:40,574 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:40,911 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:40,911 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:41,245 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:41,245 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:41,580 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:41,580 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:41,916 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:41,916 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:42,251 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:42,251 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:42,586 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:42,586 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:42,921 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:42,921 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:43,255 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:43,255 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:43,590 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:43,590 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:43,925 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:43,925 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:44,259 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:44,260 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:44,595 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:44,595 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:44,930 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:44,931 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:45,266 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:45,266 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:45,600 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:45,600 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:45,935 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:45,935 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:46,269 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:46,269 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:46,604 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:46,604 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:46,938 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:46,938 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:47,272 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:47,272 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:47,607 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:47,607 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:47,941 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:47,941 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:48,275 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:48,276 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:48,611 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:48,611 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:48,946 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:48,947 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:49,282 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:49,282 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:49,617 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:49,617 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:49,951 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:49,951 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:50,285 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:50,285 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:50,620 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:50,620 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:50,954 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:50,954 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:51,288 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:51,288 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:51,622 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:51,622 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:51,956 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:51,957 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:52,291 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:52,292 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:52,629 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:52,629 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:52,963 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:52,964 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:53,300 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:53,300 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:53,635 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:53,636 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:53,970 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:53,970 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:54,304 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:54,304 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:54,639 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:54,639 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:54,974 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:54,974 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:55,309 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:55,310 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:55,645 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:55,645 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:55,980 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:55,980 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:56,315 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:56,315 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:56,650 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:56,650 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:56,985 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:56,985 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:57,319 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:57,320 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:57,655 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:57,655 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:57,990 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:57,990 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:58,325 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:58,325 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:58,662 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:58,662 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:58,997 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:58,997 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:59,332 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:59,332 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:56:59,666 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:56:59,666 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:00,001 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:57:00,001 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:00,335 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:57:00,335 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:00,670 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:57:00,670 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:01,004 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:57:01,005 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:01,338 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:57:01,339 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:01,673 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:57:01,673 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:02,008 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:57:02,008 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:02,345 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:57:02,346 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:02,680 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:57:02,680 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:02,698 INFO delivery.orchestration Drone state change id=drone2 ABORT -> WAITING_PICKUP
+2026-01-19 17:57:12,700 INFO delivery.orchestration Drone state change id=drone2 WAITING_PICKUP -> GO_TO_CONSUMER
+2026-01-19 17:57:12,724 INFO delivery.orchestration Drone state change id=drone2 GO_TO_CONSUMER -> ABORT
+2026-01-19 17:57:12,725 WARNING delivery.orchestration Order failed order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef drone_id=drone2
+2026-01-19 17:57:12,725 INFO delivery.orchestration No available drones to reassign order_id=94a803ef-2b6f-418c-9a20-32311ebd0fef
+2026-01-19 17:57:12,749 INFO delivery.orchestration Drone state change id=drone2 ABORT -> READY
+2026-01-19 18:05:03,296 INFO delivery.orchestration Drone state change id=drone2 None -> READY
+2026-01-19 18:05:55,238 INFO delivery.orchestration Order created order_id=dc7a94c0-db1c-4034-804a-841d3ac3b713
+2026-01-19 18:05:55,239 INFO delivery.orchestration Assign order order_id=dc7a94c0-db1c-4034-804a-841d3ac3b713 drone_id=drone2 drone_gps=(35.2291913,129.0875120,50.26) provider_gps=(35.2316240,129.0851130,0.00) consumer_gps=(35.2369040,129.0791630,0.00)
+2026-01-19 18:05:55,239 INFO delivery.orchestration Assigned order_id=dc7a94c0-db1c-4034-804a-841d3ac3b713 to drone_id=drone2
+2026-01-19 18:05:55,240 INFO delivery.orchestration Drone state change id=drone2 READY -> GO_TO_PROVIDER
+2026-01-19 18:05:55,263 INFO delivery.orchestration Drone state change id=drone2 GO_TO_PROVIDER -> ABORT
+2026-01-19 18:05:55,264 WARNING delivery.orchestration Order failed order_id=dc7a94c0-db1c-4034-804a-841d3ac3b713 drone_id=drone2
+2026-01-19 18:05:55,264 INFO delivery.orchestration No available drones to reassign order_id=dc7a94c0-db1c-4034-804a-841d3ac3b713
+2026-01-19 18:05:55,287 INFO delivery.orchestration Drone state change id=drone2 ABORT -> READY
+2026-01-19 18:06:52,451 INFO delivery.orchestration Order created order_id=4ee53208-c53c-4fc2-82dd-7a6a3d170a34
+2026-01-19 18:06:52,451 INFO delivery.orchestration Assign order order_id=4ee53208-c53c-4fc2-82dd-7a6a3d170a34 drone_id=drone2 drone_gps=(35.2291915,129.0875122,50.29) provider_gps=(35.2316240,129.0851130,0.00) consumer_gps=(35.2369040,129.0791630,0.00)
+2026-01-19 18:06:52,452 INFO delivery.orchestration Assigned order_id=4ee53208-c53c-4fc2-82dd-7a6a3d170a34 to drone_id=drone2
+2026-01-19 18:06:52,454 INFO delivery.orchestration Drone state change id=drone2 READY -> GO_TO_PROVIDER
+2026-01-19 18:06:52,467 INFO delivery.orchestration Drone state change id=drone2 GO_TO_PROVIDER -> ABORT
+2026-01-19 18:06:52,467 WARNING delivery.orchestration Order failed order_id=4ee53208-c53c-4fc2-82dd-7a6a3d170a34 drone_id=drone2
+2026-01-19 18:06:52,467 INFO delivery.orchestration No available drones to reassign order_id=4ee53208-c53c-4fc2-82dd-7a6a3d170a34
+2026-01-19 18:06:52,489 INFO delivery.orchestration Drone state change id=drone2 ABORT -> READY
+2026-01-19 18:08:29,802 INFO delivery.orchestration Order created order_id=4ad1091a-d8bd-442e-b764-9c551afcc494
+2026-01-19 18:08:29,802 INFO delivery.orchestration Assign order order_id=4ad1091a-d8bd-442e-b764-9c551afcc494 drone_id=drone2 drone_gps=(35.2291914,129.0875118,50.25) provider_gps=(35.2316240,129.0851130,0.00) consumer_gps=(35.2369040,129.0791630,0.00)
+2026-01-19 18:08:29,803 INFO delivery.orchestration Assigned order_id=4ad1091a-d8bd-442e-b764-9c551afcc494 to drone_id=drone2
+2026-01-19 18:08:29,806 INFO delivery.orchestration Drone state change id=drone2 READY -> GO_TO_PROVIDER
+2026-01-19 18:09:21,175 INFO delivery.orchestration Drone state change id=drone2 GO_TO_PROVIDER -> WAITING_PICKUP
+2026-01-19 18:09:31,177 INFO delivery.orchestration Drone state change id=drone2 WAITING_PICKUP -> GO_TO_CONSUMER
+2026-01-19 18:10:31,540 INFO delivery.orchestration Drone state change id=drone2 GO_TO_CONSUMER -> WAITING_DELIVER
+2026-01-19 18:10:41,541 INFO delivery.orchestration Drone state change id=drone2 WAITING_DELIVER -> DONE
+2026-01-19 18:10:41,541 INFO delivery.orchestration Order completed order_id=4ad1091a-d8bd-442e-b764-9c551afcc494 drone_id=drone2
+2026-01-19 18:10:41,556 INFO delivery.orchestration Drone state change id=drone2 DONE -> READY
+2026-01-19 18:27:11,631 INFO delivery.orchestration Order created order_id=db86a556-ebb2-4812-a4d2-8abd5eeaf93c
+2026-01-19 18:27:11,631 INFO delivery.orchestration Assign order order_id=db86a556-ebb2-4812-a4d2-8abd5eeaf93c drone_id=drone2 drone_gps=(35.2344561,129.0815534,50.25) provider_gps=(35.2316240,129.0851130,0.00) consumer_gps=(35.2369040,129.0791630,0.00)
+2026-01-19 18:27:11,632 INFO delivery.orchestration Assigned order_id=db86a556-ebb2-4812-a4d2-8abd5eeaf93c to drone_id=drone2
+2026-01-19 18:30:01,459 INFO delivery.orchestration Order completed order_id=db86a556-ebb2-4812-a4d2-8abd5eeaf93c drone_id=drone2
