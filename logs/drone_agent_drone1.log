@@ -1,0 +1,10 @@
+2026-01-20 21:06:31,192 INFO delivery.drone_agent.drone1 Drone connected
+2026-01-20 21:10:12,561 INFO delivery.drone_agent.drone1 Assigned order_id=4a30f540-ddef-41d7-be57-aa9a26184e38
+2026-01-20 21:10:12,561 INFO delivery.drone_agent.drone1 Takeoff Current gps=(47.3979709,8.5461640,0.24)
+2026-01-20 21:10:12,593 INFO delivery.drone_agent.drone1 Takeoff start
+2026-01-20 21:10:12,608 INFO delivery.drone_agent.drone1 Fly phase takeoff to alt=10.00
+2026-01-20 21:12:51,608 INFO delivery.drone_agent.drone1 Fly complete target=(4448757.48,4492151.45,5467273.57)
+2026-01-20 21:12:52,318 INFO delivery.drone_agent.drone1 Land complete gps=(47.4071626,8.5598277,0.40)
+2026-01-20 21:13:02,318 INFO delivery.drone_agent.drone1 Takeoff Current gps=(47.4071626,8.5598277,0.40)
+2026-01-20 21:13:02,346 ERROR delivery.drone_agent.drone1 State machine error: COMMAND_DENIED: 'Command Denied'; origin: arm(); params: ()
+2026-01-20 21:50:59,910 INFO delivery.drone_agent.drone1 Drone connected
