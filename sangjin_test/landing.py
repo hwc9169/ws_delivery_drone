@@ -12,11 +12,13 @@ from gz.transport13 import Node
 from gz.msgs10.image_pb2 import Image
 
 # --- 제어 설정값 ---
-P_GAIN = 0.007             
-LAND_ALT_10M = 10.0        
-CONST_LAND_SPEED = 0.4     
-ALIGN_THRESHOLD = 15       
-FINAL_LAND_ALT = 0.4       
+P_GAIN_NORMAL = 0.007      # 일반 하강 시 정렬 감도
+P_GAIN_SOFT = 0.003        # 최종 착륙 전 초정밀 정렬 감도 (매우 천천히)
+DESCENT_SPEED_FAST = 0.7   # 5m까지 급강하 속도
+DESCENT_SPEED_SLOW = 0.3   # 정밀 하강 속도
+ALIGN_THRESHOLD = 12       
+FINAL_LAND_ALT = 0.5       
+STABILIZE_TIME = 2.0       
 
 # 전역 변수
 diff_x, diff_y = 0, 0
@@ -50,9 +52,9 @@ async def display_loop():
     global latest_frame
     while True:
         if latest_frame is not None:
-            cv2.imshow("Non-stop Descent Landing", latest_frame)
-            cv2.waitKey(1)
-        await asyncio.sleep(0.03)
+            cv2.imshow("Ultra Precision Landing", latest_frame)
+            if cv2.waitKey(10) & 0xFF == ord('q'): break
+        await asyncio.sleep(0.02)
 
 async def run_control():
     global current_alt, marker_found, diff_x, diff_y
@@ -69,59 +71,56 @@ async def run_control():
     try: await drone.offboard.start()
     except: return
 
-    # --- [1단계] 마커 최초 포착 및 타겟 고정 정렬 ---
-    print(">>> 1단계: 마커 최초 포착 대기...")
-    while not marker_found:
-        await asyncio.sleep(0.1)
-
-    fixed_target_x = diff_x
-    fixed_target_y = diff_y
-    print(f">>> [Target Lock] 고정 좌표로 정렬 시작: X={fixed_target_x}, Y={fixed_target_y}")
-
-    start_time = time.time()
+    # [1, 2, 3단계] 마커 인식 -> 정렬 -> 자세 안정화 (2초)
+    print(">>> 1-3단계: 마커 포착 및 초기 안정화 시작")
+    while not marker_found: await asyncio.sleep(0.1)
+    
     while True:
-        vx, vy = -fixed_target_y * P_GAIN, fixed_target_x * P_GAIN
+        vx, vy = -diff_y * P_GAIN_NORMAL, diff_x * P_GAIN_NORMAL
         await drone.offboard.set_velocity_body(VelocityBodyYawspeed(vx, vy, 0.0, 0.0))
         await asyncio.sleep(0.1)
-        # 실시간 인식이 되어 오차가 줄어들거나 5초가 지나면 다음 단계로
         if marker_found and abs(diff_x) < ALIGN_THRESHOLD and abs(diff_y) < ALIGN_THRESHOLD:
-            break
-        if time.time() - start_time > 5.0:
+            print(">>> 초기 정렬 완료. 2초간 대기하며 자세 안정화...")
+            await drone.offboard.set_velocity_body(VelocityBodyYawspeed(0.0, 0.0, 0.0, 0.0))
+            await asyncio.sleep(2.0)
             break
 
-    # --- [2단계] 10m 고도까지 "무조건" 하강 ---
-    # 인식 여부와 상관없이 수평 이동은 0으로 고정하고 하강만 수행
-    print(f">>> 2단계: {LAND_ALT_10M}m까지 하강 시작")
-    while current_alt > LAND_ALT_10M + 0.3:
-        # 수평 속도 0, 하강 속도 0.8m/s (빠르게 진입)
-        await drone.offboard.set_velocity_body(VelocityBodyYawspeed(0.0, 0.0, 0.8, 0.0))
+    # [4단계] 5m 고도 이상이라면 5m까지 하강
+    if current_alt > 5.0:
+        print(f">>> 4단계: 고도 {current_alt:.1f}m -> 5m까지 하강")
+        while current_alt > 5.2:
+            await drone.offboard.set_velocity_body(VelocityBodyYawspeed(0.0, 0.0, DESCENT_SPEED_FAST, 0.0))
+            await asyncio.sleep(0.1)
+
+    # [5단계] 주기적 마커 정렬하며 1m 고도까지 하강
+    print(">>> 5단계: 1m 고도까지 주기적 정렬 하강")
+    while current_alt > 1.0:
+        # 1초 정렬 하강 / 0.8초 수직 하강 반복
+        vx = -diff_y * P_GAIN_NORMAL if marker_found else 0.0
+        vy = diff_x * P_GAIN_NORMAL if marker_found else 0.0
+        await drone.offboard.set_velocity_body(VelocityBodyYawspeed(vx, vy, DESCENT_SPEED_SLOW, 0.0))
+        await asyncio.sleep(1.0)
+        await drone.offboard.set_velocity_body(VelocityBodyYawspeed(0.0, 0.0, DESCENT_SPEED_SLOW, 0.0))
+        await asyncio.sleep(0.8)
+
+    # [6, 7단계] 마지막 마커 정렬 (초정밀/저속) 및 2초 안정화
+    print(">>> 6-7단계: 최종 고도 도달. 초정밀 정렬 및 최종 안정화 시작")
+    # 0.5m 고도까지 아주 천천히 내려가며 정렬
+    while current_alt > FINAL_LAND_ALT:
+        vx = -diff_y * P_GAIN_SOFT if marker_found else 0.0
+        vy = diff_x * P_GAIN_SOFT if marker_found else 0.0
+        await drone.offboard.set_velocity_body(VelocityBodyYawspeed(vx, vy, 0.15, 0.0))
         await asyncio.sleep(0.1)
-    print(f">>> {LAND_ALT_10M}m 도달 완료.")
 
-    # --- [3단계] 천천히 하강하며 1초마다 주기적 재정렬 ---
-    print(">>> 3단계: 정밀 하강 및 주기적 재정렬 시작")
-    while True:
-        if current_alt < FINAL_LAND_ALT and marker_found and abs(diff_x) < ALIGN_THRESHOLD:
-            print(">>> [최종 착륙] 명령")
-            await drone.action.land()
-            break
+    print(f">>> 마지막 자세 안정화 대기 ({STABILIZE_TIME}초)")
+    start_time = time.time()
+    while time.time() - start_time < STABILIZE_TIME:
+        await drone.offboard.set_velocity_body(VelocityBodyYawspeed(0.0, 0.0, 0.0, 0.0))
+        await asyncio.sleep(0.05)
 
-        # [A: 재정렬 하강] 1.2초 동안 실시간 마커 위치로 정렬
-        start_time = time.time()
-        while time.time() - start_time < 1.2:
-            if current_alt < FINAL_LAND_ALT: break
-            # 마커가 보일 때만 정렬 이동, 안 보이면 하강만 유지
-            vx = -diff_y * P_GAIN if marker_found else 0.0
-            vy = diff_x * P_GAIN if marker_found else 0.0
-            await drone.offboard.set_velocity_body(VelocityBodyYawspeed(vx, vy, CONST_LAND_SPEED, 0.0))
-            await asyncio.sleep(0.05)
-
-        # [B: 안정화 하강] 1.0초 동안 수평 이동 중지하고 하강만 수행
-        start_time = time.time()
-        while time.time() - start_time < 1.0:
-            if current_alt < FINAL_LAND_ALT: break
-            await drone.offboard.set_velocity_body(VelocityBodyYawspeed(0.0, 0.0, CONST_LAND_SPEED, 0.0))
-            await asyncio.sleep(0.05)
+    # [8단계] 그대로 착륙
+    print(">>> 8단계: 최종 착륙 실행")
+    await drone.action.land()
 
 async def main():
     node = Node()
@@ -130,4 +129,5 @@ async def main():
     await asyncio.gather(run_control(), display_loop())
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try: asyncio.run(main())
+    except KeyboardInterrupt: cv2.destroyAllWindows()

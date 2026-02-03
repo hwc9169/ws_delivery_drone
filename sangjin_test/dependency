@@ -1,13 +1,17 @@
-[project]
-name = "sangjin-test"
-version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-requires-python = ">=3.10"
-dependencies = [
-    "mavsdk>=3.10.2",
-    "numpy<2",
-    "opencv-contrib-python>=4.11.0.86",
-    "opencv-python>=4.11.0.86",
-    "protobuf>=6.33.4",
-]
+
+
+uv add opencv-python
+
+### 시스템 패키지를 참조하는 가상환경으로 다시 생성해줘야합니다. (gz 패키지 사용하기 때문에)
+
+rm -rf .venv                   ####기존 가상환경 삭제
+uv venv --system-site-packages ####다시 생성
+uv sync
+
+
+
+####################################
+make px4_sitl gz_x500_mono_cam_down_aruco
+
+우분투 소리 설정 열기
+alsamixer
