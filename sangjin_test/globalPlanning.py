@@ -132,7 +132,7 @@ async def run_mission():
 
 async def main():
     node = Node()
-    lidar_topic = "/world/baylands/model/x500_lidar_2d_0/link/link/sensor/lidar_2d_v2/scan"
+    lidar_topic = "/world/default/model/x500_lidar_2d_0/link/link/sensor/lidar_2d_v2/scan"
     node.subscribe(LaserScan, lidar_topic, lidar_callback)
     await asyncio.gather(run_mission(), display_loop())
 
