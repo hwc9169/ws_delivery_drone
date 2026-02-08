@@ -1,0 +1,8 @@
+
+
+####################################
+make px4_sitl gz_x500_mono_cam_down_aruco
+
+MicroXRCEAgent udp4 -p 8888
+
+ros2 run ros_gz_bridge parameter_bridge "/world/aruco/model/x500_mono_cam_down_0/link/camera_link/sensor/camera/image@sensor_msgs/msg/Image[gz.msgs.Image" --ros-args -r /world/aruco/model/x500_mono_cam_down_0/link/camera_link/sensor/camera/image:=/camera
