@@ -1,152 +1,127 @@
+import rclpy
+from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
 import cv2
 import numpy as np
-import asyncio
-import os
-import time
 
-# Protobuf 설정
-os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
+# PX4 제어 메시지
+from px4_msgs.msg import OffboardControlMode, TrajectorySetpoint, VehicleStatus
 
-from mavsdk import System
-from mavsdk.offboard import OffboardError, VelocityBodyYawspeed
-from gz.transport13 import Node
-from gz.msgs10.image_pb2 import Image
+class PrecisionLandingNode(Node):
+    def __init__(self):
+        super().__init__('precision_landing_node')
+        
+        qos_profile = QoSProfile(
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            history=HistoryPolicy.KEEP_LAST,
+            depth=5
+        )
 
-# --- [제어 파라미터] ---
-TARGET_SPEED = 1.2          
-PIXEL_TO_M_FACTOR = 0.0017  
-TRANS_ALT = 5.0             # 저고도 모드 진입 고도
-DECEL_START_ALT = 7.0       # 부드러운 감속 시작 고도 (7m부터 감속)
-LAND_READY_ALT = 1.0        
+        # 구독 및 발행 설정
+        self.image_sub = self.create_subscription(Image, '/camera', self.image_callback, qos_profile)
+        self.status_sub = self.create_subscription(VehicleStatus, '/fmu/out/vehicle_status', self.status_callback, qos_profile)
+        self.offboard_mode_pub = self.create_publisher(OffboardControlMode, '/fmu/in/offboard_control_mode', qos_profile)
+        self.trajectory_pub = self.create_publisher(TrajectorySetpoint, '/fmu/in/trajectory_setpoint', qos_profile)
 
-# 저고도 정밀 제어 설정
-GAIN_LOW_ALT = 0.004        
-MAX_SPEED_LOW = 0.2         
-DEADZONE_LOW = 10           
-DESCENT_LOW = 0.3           
+        self.bridge = CvBridge()
+        
+        # ArUco 설정 (버전 대응)
+        self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+        try:
+            self.aruco_params = cv2.aruco.DetectorParameters()
+            self.detector = cv2.aruco.ArucoDetector(self.aruco_dict, self.aruco_params)
+            self.use_new_api = True
+        except AttributeError:
+            self.aruco_params = cv2.aruco.DetectorParameters_create()
+            self.use_new_api = False
 
-# 전역 변수
-current_alt = 0.0
-latest_frame = None
-first_detection = True  
-diff_x, diff_y = 0, 0
-marker_found = False
+        # --- 제어 파라미터 수정 ---
+        self.gain = 0.003          
+        self.max_speed = 0.5       # 최대 속도 제한 (안전 장치)
+        self.vx, self.vy, self.vz = 0.0, 0.0, 0.0
 
-def camera_callback(msg):
-    global diff_x, diff_y, marker_found, latest_frame
+        self.timer = self.create_timer(0.1, self.timer_callback)
+        self.get_logger().info('감도가 조절된 Precision Landing Node가 시작되었습니다.')
+
+    def status_callback(self, msg):
+        pass
+
+    def timer_callback(self):
+        # Offboard 하트비트
+        offboard_msg = OffboardControlMode()
+        offboard_msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
+        offboard_msg.position = False
+        offboard_msg.velocity = True
+        offboard_msg.acceleration = False
+        self.offboard_mode_pub.publish(offboard_msg)
+        
+        # 속도 명령 발행
+        self.publish_trajectory(self.vx, self.vy, self.vz)
+
+    def image_callback(self, data):
+        try:
+            frame = self.bridge.imgmsg_to_cv2(data, desired_encoding='bgr8')
+            h, w, _ = frame.shape
+            center_x, center_y = w // 2, h // 2
+
+            if self.use_new_api:
+                corners, ids, rejected = self.detector.detectMarkers(frame)
+            else:
+                corners, ids, rejected = cv2.aruco.detectMarkers(frame, self.aruco_dict, parameters=self.aruco_params)
+
+            if ids is None:
+                # 마커를 놓치면 천천히 멈추도록 설정 (급정거 방지)
+                self.vx *= 0.8
+                self.vy *= 0.8
+                self.vz = 0.0  # 하강 중지
+            else:
+                cv2.aruco.drawDetectedMarkers(frame, corners, ids)
+                m_center = np.mean(corners[0][0], axis=0)
+                m_x, m_y = int(m_center[0]), int(m_center[1])
+
+                err_x = m_x - center_x
+                err_y = m_y - center_y
+
+                # 속도 계산 및 최대 속도 제한 (Clipping)
+                raw_vx = float(-err_y * self.gain)
+                raw_vy = float(err_x * self.gain)
+                
+                self.vx = np.clip(raw_vx, -self.max_speed, self.max_speed)
+                self.vy = np.clip(raw_vy, -self.max_speed, self.max_speed)
+                self.vz = 0.15  # 하강 속도도 조금 낮춤 (기존 0.2 -> 0.15)
+
+                self.get_logger().info(f"마커 추적 중 - VX: {self.vx:.3f}, VY: {self.vy:.3f}")
+
+            # 시각화
+            cv2.line(frame, (center_x-10, center_y), (center_x+10, center_y), (255,0,0), 2)
+            cv2.line(frame, (center_x, center_y-10), (center_x, center_y+10), (255,0,0), 2)
+            cv2.imshow("Drone Landing View", frame)
+            cv2.waitKey(1)
+
+        except Exception as e:
+            self.get_logger().error(f'에러: {e}')
+
+    def publish_trajectory(self, vx, vy, vz):
+        msg = TrajectorySetpoint()
+        msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
+        msg.position = [float('nan'), float('nan'), float('nan')]
+        msg.velocity = [vx, vy, vz]
+        msg.yaw = float('nan')
+        self.trajectory_pub.publish(msg)
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = PrecisionLandingNode()
     try:
-        frame = np.frombuffer(msg.data, dtype=np.uint8).copy().reshape((msg.height, msg.width, 3))
-        processed_frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-        aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
-        aruco_params = cv2.aruco.DetectorParameters()
-        detector = cv2.aruco.ArucoDetector(aruco_dict, aruco_params)
-        corners, ids, _ = detector.detectMarkers(processed_frame)
-        if ids is not None:
-            marker_found = True
-            c = corners[0][0]
-            diff_x = int((c[0][0] + c[2][0]) / 2) - (msg.width // 2)
-            diff_y = int((c[0][1] + c[2][1]) / 2) - (msg.height // 2)
-            cv2.aruco.drawDetectedMarkers(processed_frame, corners, ids)
-        else:
-            marker_found = False
-        latest_frame = processed_frame
-    except: pass
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+        cv2.destroyAllWindows()
 
-async def display_loop():
-    global latest_frame
-    while True:
-        if latest_frame is not None:
-            cv2.imshow("Smooth Transition Landing", latest_frame)
-            if cv2.waitKey(1) & 0xFF == ord('q'): break
-        await asyncio.sleep(0.03)
-
-async def run_control():
-    global current_alt, marker_found, diff_x, diff_y, first_detection
-    drone = System()
-    await drone.connect(system_address="udp://:14540")
-    
-    async for state in drone.core.connection_state():
-        if state.is_connected: break
-
-    async def observe_altitude():
-        global current_alt
-        async for pos in drone.telemetry.position():
-            current_alt = pos.relative_altitude_m
-    asyncio.ensure_future(observe_altitude())
-
-    while current_alt == 0: await asyncio.sleep(0.1)
-    await drone.offboard.set_velocity_body(VelocityBodyYawspeed(0.0, 0.0, 0.0, 0.0))
-    try: await drone.offboard.start()
-    except: return
-
-    # --- [Step 1] 대각선 이동 및 부드러운 감속 (5m까지) ---
-    print(">>> [Step 1] 마커 탐지 시 대각선 하강 및 부드러운 감속 시작")
-    while first_detection:
-        if marker_found:
-            snap_alt = current_alt
-            dist_x = diff_x * snap_alt * PIXEL_TO_M_FACTOR
-            dist_y = -diff_y * snap_alt * PIXEL_TO_M_FACTOR
-            total_dist = np.sqrt(dist_x**2 + dist_y**2)
-            travel_time = total_dist / TARGET_SPEED
-
-            if travel_time > 0.1:
-                vz_orig = (snap_alt - TRANS_ALT) / travel_time
-                vx_orig = (dist_y / total_dist) * TARGET_SPEED
-                vy_orig = (dist_x / total_dist) * TARGET_SPEED
-
-                start_time = time.time()
-                while time.time() - start_time < travel_time:
-                    # [핵심] 7m부터 5m까지 선형 감속 적용
-                    if current_alt < DECEL_START_ALT:
-                        # 7m에서 5m 사이의 비율 계산 (1.0 -> 0.0)
-                        ratio = max(0.0, (current_alt - TRANS_ALT) / (DECEL_START_ALT - TRANS_ALT))
-                        # 속도를 현재 비율에 맞춰 줄임 (최소 속도는 저고도 모드 속도와 맞춤)
-                        vx = vx_orig * ratio
-                        vy = vy_orig * ratio
-                        vz = vz_orig * max(0.5, ratio) # 하강 속도는 너무 줄이지 않음
-                    else:
-                        vx, vy, vz = vx_orig, vy_orig, vz_orig
-
-                    await drone.offboard.set_velocity_body(VelocityBodyYawspeed(vx, vy, vz, 0.0))
-                    await asyncio.sleep(0.05)
-            
-            print(">>> [전환] 감속 완료, 정밀 트래킹 모드 진입")
-            first_detection = False
-        await asyncio.sleep(0.1)
-
-    # --- [Step 2] 연속 정밀 하강 (1m까지) ---
-    while current_alt > LAND_READY_ALT:
-        vx, vy, vz = 0.0, 0.0, DESCENT_LOW
-        if marker_found:
-            target_vx = -diff_y * GAIN_LOW_ALT if abs(diff_y) > DEADZONE_LOW else 0.0
-            target_vy = diff_x * GAIN_LOW_ALT if abs(diff_x) > DEADZONE_LOW else 0.0
-            vx = max(min(target_vx, MAX_SPEED_LOW), -MAX_SPEED_LOW)
-            vy = max(min(target_vy, MAX_SPEED_LOW), -MAX_SPEED_LOW)
-        else:
-            vz = 0.0 
-        await drone.offboard.set_velocity_body(VelocityBodyYawspeed(vx, vy, vz, 0.0))
-        await asyncio.sleep(0.05)
-
-    # --- [Step 3] 1m 지점 최종 정렬 및 대기 ---
-    print(">>> [Step 3] 1m 도달. 최종 정렬을 위해 2.5초간 대기")
-    stop_start_time = time.time()
-    while time.time() - stop_start_time < 2.5:
-        vx, vy = 0.0, 0.0
-        if marker_found:
-            vx = max(min(-diff_y * GAIN_LOW_ALT, MAX_SPEED_LOW), -MAX_SPEED_LOW)
-            vy = max(min(diff_x * GAIN_LOW_ALT, MAX_SPEED_LOW), -MAX_SPEED_LOW)
-        await drone.offboard.set_velocity_body(VelocityBodyYawspeed(vx, vy, 0.0, 0.0))
-        await asyncio.sleep(0.05)
-
-    print(">>> [Step 4] 착륙")
-    await drone.action.land()
-    os._exit(0)
-
-async def main():
-    node = Node()
-    topic = "/world/aruco/model/x500_mono_cam_down_0/link/camera_link/sensor/camera/image"
-    node.subscribe(Image, topic, camera_callback)
-    await asyncio.gather(run_control(), display_loop())
-
-if __name__ == "__main__":
-    asyncio.run(main())
+if __name__ == '__main__':
+    main()
