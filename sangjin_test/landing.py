@@ -5,13 +5,14 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
 import numpy as np
+import time
+import math
 
-# PX4 제어 메시지
-from px4_msgs.msg import OffboardControlMode, TrajectorySetpoint, VehicleStatus
+from px4_msgs.msg import OffboardControlMode, TrajectorySetpoint, VehicleLocalPosition
 
-class PrecisionLandingNode(Node):
+class OptimalLandingNode(Node):
     def __init__(self):
-        super().__init__('precision_landing_node')
+        super().__init__('optimal_landing_node')
         
         qos_profile = QoSProfile(
             reliability=ReliabilityPolicy.BEST_EFFORT,
@@ -19,15 +20,20 @@ class PrecisionLandingNode(Node):
             depth=5
         )
 
-        # 구독 및 발행 설정
         self.image_sub = self.create_subscription(Image, '/camera', self.image_callback, qos_profile)
-        self.status_sub = self.create_subscription(VehicleStatus, '/fmu/out/vehicle_status', self.status_callback, qos_profile)
+        self.pos_sub = self.create_subscription(VehicleLocalPosition, '/fmu/out/vehicle_local_position', self.pos_callback, qos_profile)
         self.offboard_mode_pub = self.create_publisher(OffboardControlMode, '/fmu/in/offboard_control_mode', qos_profile)
         self.trajectory_pub = self.create_publisher(TrajectorySetpoint, '/fmu/in/trajectory_setpoint', qos_profile)
 
         self.bridge = CvBridge()
+        self.current_pos = [0.0, 0.0, 0.0]
+        self.target_pos = [None, None, None] # 실시간 업데이트될 목표 절대 좌표
         
-        # ArUco 설정 (버전 대응)
+        self.state = "SEARCHING"
+        self.fov = 1.047
+        self.kp = 0.5 # 위치 오차를 속도로 변환하는 게인 (상황에 따라 조절)
+
+        # ArUco 설정
         self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
         try:
             self.aruco_params = cv2.aruco.DetectorParameters()
@@ -37,91 +43,87 @@ class PrecisionLandingNode(Node):
             self.aruco_params = cv2.aruco.DetectorParameters_create()
             self.use_new_api = False
 
-        # --- 제어 파라미터 수정 ---
-        self.gain = 0.003          
-        self.max_speed = 0.5       # 최대 속도 제한 (안전 장치)
-        self.vx, self.vy, self.vz = 0.0, 0.0, 0.0
+        self.timer = self.create_timer(0.02, self.timer_callback) # 50Hz
+        self.get_logger().info('최적화된 실시간 추적형 착륙 알고리즘 시작')
 
-        self.timer = self.create_timer(0.1, self.timer_callback)
-        self.get_logger().info('감도가 조절된 Precision Landing Node가 시작되었습니다.')
+    def pos_callback(self, msg):
+        self.current_pos = [msg.x, msg.y, msg.z]
 
-    def status_callback(self, msg):
-        pass
+    def image_callback(self, data):
+        try:
+            frame = self.bridge.imgmsg_to_cv2(data, 'bgr8')
+            if self.use_new_api:
+                corners, ids, _ = self.detector.detectMarkers(frame)
+            else:
+                corners, ids, _ = cv2.aruco.detectMarkers(frame, self.aruco_dict, parameters=self.aruco_params)
+
+            if ids is not None:
+                # 마커가 보일 때마다 목표 지점을 현재 드론 위치 기준으로 업데이트 (Update 단계)
+                m_center = np.mean(corners[0][0], axis=0)
+                err_px_x = m_center[0] - frame.shape[1] // 2
+                err_px_y = m_center[1] - frame.shape[0] // 2
+
+                alt = abs(self.current_pos[2])
+                m_per_px = (2 * alt * math.tan(self.fov / 2)) / frame.shape[1]
+                
+                # 드론의 현재 절대 좌표에 픽셀 오차만큼 더해서 '마커의 절대 좌표'를 계산
+                dx_body = -err_px_y * m_per_px
+                dy_body = err_px_x * m_per_px
+                
+                # 마커가 있는 실제 지상의 절대 위치를 타겟으로 고정
+                self.target_pos = [
+                    self.current_pos[0] + dx_body,
+                    self.current_pos[1] + dy_body,
+                    -1.0 # 최종 목표 고도 1m
+                ]
+                
+                if self.state == "SEARCHING":
+                    self.state = "DESCENDING"
+                    self.get_logger().info('마커 포착: 추적 및 하강 시작')
+
+            cv2.imshow("Optimal View", frame)
+            cv2.waitKey(1)
+        except Exception: pass
 
     def timer_callback(self):
-        # Offboard 하트비트
+        # 오프보드 신호
         offboard_msg = OffboardControlMode()
         offboard_msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
         offboard_msg.position = False
         offboard_msg.velocity = True
-        offboard_msg.acceleration = False
         self.offboard_mode_pub.publish(offboard_msg)
-        
-        # 속도 명령 발행
-        self.publish_trajectory(self.vx, self.vy, self.vz)
 
-    def image_callback(self, data):
-        try:
-            frame = self.bridge.imgmsg_to_cv2(data, desired_encoding='bgr8')
-            h, w, _ = frame.shape
-            center_x, center_y = w // 2, h // 2
+        if self.state == "DESCENDING" and self.target_pos[0] is not None:
+            # P 제어: (목표 위치 - 현재 위치) * 게인 = 필요 속도
+            err_x = self.target_pos[0] - self.current_pos[0]
+            err_y = self.target_pos[1] - self.current_pos[1]
+            err_z = self.target_pos[2] - self.current_pos[2]
 
-            if self.use_new_api:
-                corners, ids, rejected = self.detector.detectMarkers(frame)
-            else:
-                corners, ids, rejected = cv2.aruco.detectMarkers(frame, self.aruco_dict, parameters=self.aruco_params)
+            # 속도 제한 (최대 0.5m/s로 천천히 안전하게)
+            cmd_vel = [
+                np.clip(err_x * self.kp, -0.5, 0.5),
+                np.clip(err_y * self.kp, -0.5, 0.5),
+                np.clip(err_z * self.kp, -0.3, 0.3)
+            ]
 
-            if ids is None:
-                # 마커를 놓치면 천천히 멈추도록 설정 (급정거 방지)
-                self.vx *= 0.8
-                self.vy *= 0.8
-                self.vz = 0.0  # 하강 중지
-            else:
-                cv2.aruco.drawDetectedMarkers(frame, corners, ids)
-                m_center = np.mean(corners[0][0], axis=0)
-                m_x, m_y = int(m_center[0]), int(m_center[1])
+            self.publish_velocity(cmd_vel)
 
-                err_x = m_x - center_x
-                err_y = m_y - center_y
+            # 1m 고도 및 오차 10cm 이내면 정지
+            if abs(err_z) < 0.1 and abs(err_x) < 0.1 and abs(err_y) < 0.1:
+                self.state = "FINISHED"
+                self.get_logger().info('최적 지점 정착 완료')
 
-                # 속도 계산 및 최대 속도 제한 (Clipping)
-                raw_vx = float(-err_y * self.gain)
-                raw_vy = float(err_x * self.gain)
-                
-                self.vx = np.clip(raw_vx, -self.max_speed, self.max_speed)
-                self.vy = np.clip(raw_vy, -self.max_speed, self.max_speed)
-                self.vz = 0.15  # 하강 속도도 조금 낮춤 (기존 0.2 -> 0.15)
-
-                self.get_logger().info(f"마커 추적 중 - VX: {self.vx:.3f}, VY: {self.vy:.3f}")
-
-            # 시각화
-            cv2.line(frame, (center_x-10, center_y), (center_x+10, center_y), (255,0,0), 2)
-            cv2.line(frame, (center_x, center_y-10), (center_x, center_y+10), (255,0,0), 2)
-            cv2.imshow("Drone Landing View", frame)
-            cv2.waitKey(1)
-
-        except Exception as e:
-            self.get_logger().error(f'에러: {e}')
-
-    def publish_trajectory(self, vx, vy, vz):
+    def publish_velocity(self, vel):
         msg = TrajectorySetpoint()
         msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
-        msg.position = [float('nan'), float('nan'), float('nan')]
-        msg.velocity = [vx, vy, vz]
-        msg.yaw = float('nan')
+        msg.velocity = [float(vel[0]), float(vel[1]), float(vel[2])]
         self.trajectory_pub.publish(msg)
 
 def main(args=None):
     rclpy.init(args=args)
-    node = PrecisionLandingNode()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
-        cv2.destroyAllWindows()
+    node = OptimalLandingNode()
+    try: rclpy.spin(node)
+    except KeyboardInterrupt: pass
+    node.destroy_node(); rclpy.shutdown()
 
-if __name__ == '__main__':
-    main()
+if __name__ == '__main__': main()
